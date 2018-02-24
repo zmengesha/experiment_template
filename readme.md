@@ -1,3 +1,17 @@
+# Instructions
+
+1. Open the command line. Move to the place where you want to put the experiment.
+
+2. Execute `git clone https://github.com/m-hahn/experiment_template.git'
+
+3. Execute `pwd'. 
+
+4. Open a new tab in your browser, and paste the following path into the address bar: `PATH/experiment_template/template/template.html', where `PATH' is the output of the command `pwd' from the last step. Hit Enter to open this page.
+
+5. You should now see the welcome page of a mock experiment. You can click through it to see what it looks like. If you are already familiar with HTML and Javascript, you can adapt the template for your needs.
+ 
+# Some Instructions for Building off this Template
+
 Inside the _shared are some helper js files, some libraries we call. Some of these are completely external, like jquery and raphael, some of them are written by members of the lab, like mmturkey and utils.
 
 Inside your javascript file for your own experiment, e.g. template.js, you'll write up the structure that the slides have. In template.js, the line
