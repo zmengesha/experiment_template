@@ -1,15 +1,25 @@
 # Instructions
 
-1. Open the command line. Move to the place where you want to put the experiment.
+1. Open the command line and move to the place where you want to put the experiment.
 
-2. Execute `git clone https://github.com/m-hahn/experiment_template.git'
+2. Execute `git clone https://github.com/m-hahn/experiment_template.git`.
 
-3. Execute `pwd'. 
+If you have not yet installed git, an alternative is to go to `https://github.com/m-hahn/experiment_template`, click on `Clone or download`, then `Download ZIP`. After downloading, unpack the archive at the intended place.
 
-4. Open a new tab in your browser, and paste the following path into the address bar: `PATH/experiment_template/template/template.html', where `PATH' is the output of the command `pwd' from the last step. Hit Enter to open this page.
+3. Open a new tab in your browser, and paste the following path into the address bar: `PATH/experiment_template/template/template.html`, where `PATH` is the path where you put the experiment template in the previous step. (You can use `pwd` to display the current path in the command line.) Hit Enter to open this page.
 
-5. You should now see the welcome page of a mock experiment. You can click through it to see what it looks like. If you are already familiar with HTML and Javascript, you can adapt the template for your needs.
+5. You should now see the welcome page of a mock experiment. You can click through it to see what it looks like. If you are already familiar with HTML and Javascript, you can adapt the template for your needs. In any case, for this workshop, we'll pretend that this is the experiment that you want to run.
  
+6. In order for participants to see you experiments on the web, you will now upload it to your Stanford webspace.
+
+7. Open a new command line tab. Type `ssh YOUR_SUNET_ID@cardinal` and hit enter. Go through the authentication procedure.
+
+8. Execute `ls WWW`. Unles you have already put things in your webspace, nothing should show up. If an error message appears, execute `mkdir WWW`.
+
+9. Going back to the previos tab, execute `scp -r experiment_template YOUR_SUNET_ID@cardinal:~/WWW/`
+
+10. Once this has finished, open `http://stanford.edu/~YOUR_SUNET_ID/experiment_template/template/template.html` in your browser. The experiment should show up. Now your experiment is on the web!
+
 # Some Instructions for Building off this Template
 
 Inside the _shared are some helper js files, some libraries we call. Some of these are completely external, like jquery and raphael, some of them are written by members of the lab, like mmturkey and utils.
