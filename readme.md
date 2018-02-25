@@ -1,5 +1,6 @@
 # Instructions
 
+
 ## Put the Experiment on your Webspace
 
 1. Open the command line and move to the place where you want to put the experiment.
@@ -22,9 +23,34 @@ If you have not yet installed git, an alternative is to go to `https://github.co
 
 10. Once this has finished, open `http://stanford.edu/~YOUR_SUNET_ID/experiment_template/template/template.html` in your browser. The experiment should show up. Now your experiment is on the web!
 
+
+## Create an AWS Account
+
+1.    Create an Amazon Web Services (AWS) account at https://aws-portal.amazon.com/gp/aws/developer/registration/index.html.
+2.    Sign up for an Amazon Mechanical Turk Requester account at the https://requester.mturk.com/.
+3.    Download and install Java Runtime Environment (JRE) from: http://www.oracle.com/technetwork/java/javase/downloads/index.html.
+4.    Download and unzip Amazon Mechanical Turk Command Line Tools from https://requester.mturk.com/developer/tools/clt
+5. Go to https://aws.amazon.com/ and log into your AWS account.
+Click on your name and then `My Security Credentials'.
+Click on `Get started wih IAM Users'.
+Click on `Add User'.
+5.    Follow our instructions to generate an MTurk access key.
+6.    At the place where you have unzipped the Command Line Tools, there should be a folder `aws-mturk-clt-...`.
+7.    Inside this folder, there is a `/bin` directory, inside which there is a file called `mturk.properties`. Open this file in a text editor.
+8. Add the lines
+```
+access_key=ACCESS_KEY_ID_FROM_PREVIOUS_STEP
+secret_key=SECRET_KEY_FROM_PREVIOUS_STEP
+```
+pasting the keys from the previous step in the place of the placeholders.
+9. The file will also contain a line that will read something like `service_url=https://mechanicalturk.amazonaws.com/?Service=AWSMechanicalTurkRequester`. Check whether, after `service_url=`, it says `http` or `https`.
+
+
 ## Post it to MTurk
 
 In this section, you will post the experiment to the MTurk Sandbox.
+
+1. To post experiments, you will be using a Python script. If you have not installed Python, you will first need to install it. You can download Python from `https://www.python.org/downloads/`. We recommend downloading 2.7, not 3.6.
 
 1. In the command line, move to the place where you have downloaded the experiment. Execute `git clone https://github.com/feste/Submiterator.git`.
 
@@ -58,17 +84,29 @@ In the sixth line, replace `YOUR_SUNET_ID` with your SUNET ID.
 
 Save this file in the `Submiterator` directory that you have, giving it a name ending in `.config`, such as `my-first-experiment.config`.
 
-3. Open the command line and navigate into the `Submiterator` directory. Run the following command
+3. Run the following commands:
+```
+export MTURK_CMD_HOME=PATH_WHERE_YOU_HAVE_UNZIPPED_AWS_CLT/aws-mturk-clt-1.3.4
+export JAVA_HOME=PATH_OF_YOUR_JAVA_RUNTIME_ENVIRONMENT
+```
+The PATH_OF_YOUR_JAVA_RUNTIME_ENVIRONMENT might be `/usr`.
 
+The first one tells the Python script where to look for the AWS Command Line Tools, the second one makes sure the Java programs contained in it can be executed.
+
+3. Open the command line and navigate into the `Submiterator` directory. Run the following command
+```
     python submiterator.py posthit my-first-experiment
+```
 
 4. To get the results:
-
+```
     python submiterator.py getresults my-first-experiment
+```
 
 5. To get a list of results by trials, run
-
+```
     python submiterator.py reformat my-first-experiment
+```
 
 which will generate a set of `.tsv` files.
 
