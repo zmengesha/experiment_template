@@ -1,6 +1,5 @@
 # Instructions
 
-
 ## Put the Experiment on your Webspace
 
 1. Open the command line and move to the place where you want to put the experiment.
@@ -31,22 +30,22 @@ If you have not yet installed git, an alternative is to go to `https://github.co
 3.    Download and install Java Runtime Environment (JRE) from: http://www.oracle.com/technetwork/java/javase/downloads/index.html.
 4.    Download and unzip Amazon Mechanical Turk Command Line Tools from https://requester.mturk.com/developer/tools/clt
 5. Go to https://aws.amazon.com/ and log into your AWS account.
-Click on your name and then `My Security Credentials'.
-Click on `Get started wih IAM Users'.
-Click on `Add User'.
+Click on your name and then `My Security Credentials`.
+Click on `Get started wih IAM Users`.
+Click on `Add User`.
 5.    Follow our instructions to generate an MTurk access key.
 6.    At the place where you have unzipped the Command Line Tools, there should be a folder `aws-mturk-clt-...`.
 7.    Inside this folder, there is a `/bin` directory, inside which there is a file called `mturk.properties`. Open this file in a text editor.
-8. Add the lines
+8.  There should be lines 
 ```
-access_key=ACCESS_KEY_ID_FROM_PREVIOUS_STEP
-secret_key=SECRET_KEY_FROM_PREVIOUS_STEP
+access_key=[insert your access key here]
+secret_key=[insert your secret key here]
 ```
-pasting the keys from the previous step in the place of the placeholders.
-9. The file will also contain a line that will read something like `service_url=https://mechanicalturk.amazonaws.com/?Service=AWSMechanicalTurkRequester`. Check whether, after `service_url=`, it says `http` or `https`.
+Paste the keys from the previous step in the place of the placeholders.
+9. Save the file. Important: This file now contains your secret key, and anyone having this file can post HITs in your name. It might be reasonable to remove the keys once you're done and generate new keys when you do your next experiment.
 
 
-## Post it to MTurk
+## Post your Experiment to MTurk
 
 In this section, you will post the experiment to the MTurk Sandbox.
 
