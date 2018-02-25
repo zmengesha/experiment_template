@@ -103,6 +103,8 @@ The first one tells the Python script where to look for the AWS Command Line Too
 ```
     python submiterator.py posthit my-first-experiment
 ```
+This will return a message giving the URL to the experiment on MTurk, and generate a bunch of files.
+The script stores the HIT's ID in the `my-first-experiment.success` file, so make sure not to delete this one before you have downloaded the results. If you're running an expensive experiment, it might make sense to backup this file.
 
 4. To get the results:
 ```
