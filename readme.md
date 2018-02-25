@@ -34,6 +34,7 @@ In either case, you will now have a folder called `Submiterator`.
 
 2. Open a text editor and paste the following:
 
+```
     {
     "rewriteProperties":"yes",
     "liveHIT":"no",
@@ -51,6 +52,7 @@ In either case, you will now have a folder called `Submiterator`.
     "autoapprovaldelay":"60000",
     "conditions":"cond"
     }
+```
 
 In the sixth line, replace `YOUR_SUNET_ID` with your SUNET ID.
 
