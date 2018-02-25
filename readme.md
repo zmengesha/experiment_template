@@ -1,5 +1,12 @@
 # Instructions
 
+In this tutorial, you will post an experiment to the Mechanical Turk sandbox. This involves three steps:
+1. Creating an experiment and uploading it to your Stanford webspace. For this tutorial, we provide a dummy experiment that you can use.
+2. Creating an Amazon Web Services Account and installing the MTurk Command Line Tools.
+3. Posting your experiment. You'll be using a Python script that interfaces nicely with the MTurk Command Line Tools.
+
+
+
 ## Put the Experiment on your Webspace
 
 1. Open the command line and move to the place where you want to put the experiment.
@@ -23,7 +30,7 @@ If you have not yet installed git, an alternative is to go to `https://github.co
 10. Once this has finished, open `http://stanford.edu/~YOUR_SUNET_ID/experiment_template/template/template.html` in your browser. The experiment should show up. Now your experiment is on the web!
 
 
-## Create an AWS Account
+## Install Amazon MTurk Command Line Tools
 
 1.    Create an Amazon Web Services (AWS) account at https://aws-portal.amazon.com/gp/aws/developer/registration/index.html.
 2.    Sign up for an Amazon Mechanical Turk Requester account at the https://requester.mturk.com/.
@@ -109,7 +116,46 @@ The first one tells the Python script where to look for the AWS Command Line Too
 
 which will generate a set of `.tsv` files.
 
-# Some Instructions for Building off this Template
+
+# Moving On
+
+Here are some notes for running experiments beyond this tutorial.
+
+## The .config File
+
+Consider the `...config` file that you created in the `Submiterator-master` folder.
+For every HIT that you post, you will need to create a new `...config` file.
+Change the value of `liveHIT` to `yes` once you're ready to post your HIT for workers to do.
+Edit values for title and description for your experiment.
+`reward` indicates the payment per participant. Note that this is only the amount that a participant gets, to this Amazon adds a fee.
+`numberofassignments` indicates how many participants you want for the HIT. The fee will depend on the number of participants, so you might want to create a series of smaller HITs.
+`assignmentduration` indicates how many seconds after a worker has accepted the HIT it will expire. Give ample time so that workers are not rushed.
+
+```
+    {
+    "rewriteProperties":"yes",
+    "liveHIT":"no",
+    "title":"a title to show to turkers",
+    "description":"a description to show to turkers",
+    "experimentURL":"https://stanford.edu/~YOUR_SUNET_ID/experiment_template/template/template.html",
+    "keywords":"language research stanford fun cognitive science university explanations",
+    "USonly?":"yes",
+    "minPercentPreviousHITsApproved":"95",
+    "frameheight":"650",
+    "reward":"0.00",
+    "numberofassignments":"1",
+    "assignmentduration":"1800",
+    "hitlifetime":"2592000",
+    "autoapprovaldelay":"60000",
+    "conditions":"cond"
+    }
+```
+
+## Multiple Participation
+
+If you have a series of HITs and want to ensure that every worker participates only in one HIT, you can use a code snippet provided at https://uniqueturker.myleott.com/.
+
+## Instructions for Building off this Template
 
 Inside the _shared are some helper js files, some libraries we call. Some of these are completely external, like jquery and raphael, some of them are written by members of the lab, like mmturkey and utils.
 
