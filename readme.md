@@ -1,5 +1,7 @@
 # Instructions
 
+## Put the Experiment on your Webspace
+
 1. Open the command line and move to the place where you want to put the experiment.
 
 2. Execute `git clone https://github.com/m-hahn/experiment_template.git`.
@@ -19,6 +21,54 @@ If you have not yet installed git, an alternative is to go to `https://github.co
 9. Going back to the previos tab, execute `scp -r experiment_template YOUR_SUNET_ID@cardinal:~/WWW/`
 
 10. Once this has finished, open `http://stanford.edu/~YOUR_SUNET_ID/experiment_template/template/template.html` in your browser. The experiment should show up. Now your experiment is on the web!
+
+## Post it to MTurk
+
+In this section, you will post the experiment to the MTurk Sandbox.
+
+1. In the command line, move to the place where you have downloaded the experiment. Execute `git clone https://github.com/feste/Submiterator.git`.
+
+Again, if you have not installed git, you can `https://github.com/feste/Submiterator`, and click on `Clone or download`. Extract the downloaded zip file.
+
+In either case, you will now have a folder called `Submiterator`.
+
+2. Open a text editor and paste the following:
+
+    {
+    "rewriteProperties":"yes",
+    "liveHIT":"no",
+    "title":"a title to show to turkers",
+    "description":"a description to show to turkers",
+    "experimentURL":"https://stanford.edu/~YOUR_SUNET_ID/experiment_template/template/template.html",
+    "keywords":"language research stanford fun cognitive science university explanations",
+    "USonly?":"yes",
+    "minPercentPreviousHITsApproved":"95",
+    "frameheight":"650",
+    "reward":"0.00",
+    "numberofassignments":"1",
+    "assignmentduration":"1800",
+    "hitlifetime":"2592000",
+    "autoapprovaldelay":"60000",
+    "conditions":"cond"
+    }
+
+In the sixth line, replace `YOUR_SUNET_ID` with your SUNET ID.
+
+Save this file in the `Submiterator` directory that you have, giving it a name ending in `.config`, such as `my-first-experiment.config`.
+
+3. Open the command line and navigate into the `Submiterator` directory. Run the following command
+
+    python submiterator.py posthit my-first-experiment
+
+4. To get the results:
+
+    python submiterator.py getresults my-first-experiment
+
+5. To get a list of results by trials, run
+
+    python submiterator.py reformat my-first-experiment
+
+which will generate a set of `.tsv` files.
 
 # Some Instructions for Building off this Template
 
