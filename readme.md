@@ -33,13 +33,14 @@ If you have not yet installed git, an alternative is to go to https://github.com
 
 1.    Create an Amazon Web Services (AWS) account at https://aws-portal.amazon.com/gp/aws/developer/registration/index.html.
 2.    Sign up for an Amazon Mechanical Turk Requester account at the https://requester.mturk.com/.
+2.    Now you will link your AWS Account and your MTurk Requester Account. Open https://requester.mturk.com/developer, and click `Link your AWS Account`. Then sign-in with your AWS Root user email address and password.
 3.    Download and install Java Runtime Environment (JRE) from: http://www.oracle.com/technetwork/java/javase/downloads/index.html.
 4.    Download and unzip Amazon Mechanical Turk Command Line Tools from https://requester.mturk.com/developer/tools/clt
 5. Go to https://aws.amazon.com/ and log into your AWS account.
 Click on your name and then `My Security Credentials`.
 Click on `Get started wih IAM Users`.
 Click on `Add User`.
-5.    Follow our instructions to generate an MTurk access key.
+5.    Follow our instructions (see email) to generate an MTurk access key.
 6.    At the place where you have unzipped the Command Line Tools, there should be a folder `aws-mturk-clt-...`.
 7.    Inside this folder, there is a `/bin` directory, inside which there is a file called `mturk.properties`. Open this file in a text editor.
 8.  There should be lines 
@@ -126,6 +127,7 @@ which will generate a set of `.tsv` files giving results by trials and subjects.
 # Beyond this Tutorial
 
 Here are some notes for running experiments beyond this tutorial.
+Of course, you're welcome to come to us with any questions about creating and running your own experiments.
 
 ## The .config File
 
