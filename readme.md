@@ -16,17 +16,17 @@ If you have not yet installed git, an alternative is to go to https://github.com
 
 3. Open a new tab in your browser, and paste the following path into the address bar: `PATH/experiment_template/template/template.html`, where `PATH` is the path where you put the experiment template in the previous step. (You can use `pwd` to display the current path in the command line.) Hit Enter to open this page.
 
-5. You should now see the welcome page of a mock experiment. You can click through it to see what it looks like. The second and third slide should contain the Consent Form from https://linguistics.stanford.edu/resources/experimental-protocol. If you are already familiar with HTML and Javascript, you can adapt the template for your needs. In any case, for this workshop, we'll pretend that this is the experiment that you want to run.
+4. You should now see the welcome page of a mock experiment. You can click through it to see what it looks like. The second and third slide should contain the Consent Form from https://linguistics.stanford.edu/resources/experimental-protocol. If you are already familiar with HTML and Javascript, you can adapt the template for your needs. In any case, for this workshop, we'll pretend that this is the experiment that you want to run.
  
-6. In order for participants to see you experiments on the web, you will now upload it to your Stanford webspace.
+5. In order for participants to see you experiments on the web, you will now upload it to your Stanford webspace.
 
-7. Open a new command line tab. Type `ssh YOUR_SUNET_ID@cardinal` and hit enter. Go through the authentication procedure.
+6. Open a new command line tab. Type `ssh YOUR_SUNET_ID@cardinal` and hit enter. Go through the authentication procedure.
 
-8. Execute `ls WWW`. Unles you have already put things in your webspace, nothing should show up. If an error message appears, execute `mkdir WWW`.
+7. Execute `ls WWW`. Unles you have already put things in your webspace, nothing should show up. If an error message appears, execute `mkdir WWW`.
 
-9. Going back to the previos tab, execute `scp -r experiment_template YOUR_SUNET_ID@cardinal:~/WWW/`
+8. Going back to the previos tab, execute `scp -r experiment_template YOUR_SUNET_ID@cardinal:~/WWW/`
 
-10. Once this has finished, open `http://stanford.edu/~YOUR_SUNET_ID/experiment_template/template/template.html` in your browser. The experiment should show up. Now your experiment is on the web!
+9. Once this has finished, open `http://stanford.edu/~YOUR_SUNET_ID/experiment_template/template/template.html` in your browser. The experiment should show up. Now your experiment is on the web!
 
 
 ## Install Amazon MTurk Command Line Tools
@@ -59,11 +59,13 @@ In this section, you will post the experiment to the MTurk Sandbox.
 
 1. In the command line, navigate to the place where you have downloaded the experiment. Execute
  
-```git clone https://github.com/feste/Submiterator.git```
+```
+git clone https://github.com/feste/Submiterator.git
+```
 
 Again, if you have not installed git, you can go to https://github.com/feste/Submiterator, and click on `Clone or download`. Extract the downloaded zip file.
 
-In either case, you will now have a directory called `Submiterator` at the place where you downloaded the script.
+2. In either case, you will now have a directory called `Submiterator` at the place where you downloaded the script.
 
 2. Open a text editor and paste the following:
 
