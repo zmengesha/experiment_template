@@ -10,9 +10,9 @@ In this tutorial, you will post an experiment to the Mechanical Turk sandbox. Th
 
 1. Open the command line and move to the place where you want to put the experiment.
 
-2. Execute `git clone https://github.com/m-hahn/experiment_template.git`.
+2. Execute `git clone https://github.com/m-hahn/experiment_template.git`
 
-If you have not yet installed git, an alternative is to go to `https://github.com/m-hahn/experiment_template`, click on `Clone or download`, then `Download ZIP`. After downloading, unpack the archive at the intended place.
+If you have not yet installed git, an alternative is to go to https://github.com/m-hahn/experiment_template, click on `Clone or download`, then `Download ZIP`. After downloading, unpack the archive at the intended place.
 
 3. Open a new tab in your browser, and paste the following path into the address bar: `PATH/experiment_template/template/template.html`, where `PATH` is the path where you put the experiment template in the previous step. (You can use `pwd` to display the current path in the command line.) Hit Enter to open this page.
 
@@ -55,12 +55,13 @@ Paste the keys from the previous step in the place of the placeholders.
 
 In this section, you will post the experiment to the MTurk Sandbox.
 
-1. To post experiments, you will be using a Python script. If you have not installed Python, you will first need to install it. You can download Python from `https://www.python.org/downloads/`. The script will definitely work with Python 2.7, so we recommend downloading this.
+1. To post experiments, you will be using a Python script. If you have not installed Python, you will first need to install it. You can download Python from https://www.python.org/downloads/. The script will definitely work with Python 2.7, so we recommend downloading this.
 
-1. In the command line, navigate to the place where you have downloaded the experiment. Execute 
+1. In the command line, navigate to the place where you have downloaded the experiment. Execute
+ 
 ```git clone https://github.com/feste/Submiterator.git```
 
-Again, if you have not installed git, you can go to `https://github.com/feste/Submiterator`, and click on `Clone or download`. Extract the downloaded zip file.
+Again, if you have not installed git, you can go to https://github.com/feste/Submiterator, and click on `Clone or download`. Extract the downloaded zip file.
 
 In either case, you will now have a directory called `Submiterator` at the place where you downloaded the script.
 
