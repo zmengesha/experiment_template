@@ -6,7 +6,6 @@ In this tutorial, you will post an experiment to the Mechanical Turk sandbox. Th
 3. Posting your experiment. You'll be using a Python script that interfaces nicely with the MTurk Command Line Tools.
 
 
-
 ## Put the Experiment on your Webspace
 
 1. Open the command line and move to the place where you want to put the experiment.
@@ -17,7 +16,7 @@ If you have not yet installed git, an alternative is to go to `https://github.co
 
 3. Open a new tab in your browser, and paste the following path into the address bar: `PATH/experiment_template/template/template.html`, where `PATH` is the path where you put the experiment template in the previous step. (You can use `pwd` to display the current path in the command line.) Hit Enter to open this page.
 
-5. You should now see the welcome page of a mock experiment. You can click through it to see what it looks like. If you are already familiar with HTML and Javascript, you can adapt the template for your needs. In any case, for this workshop, we'll pretend that this is the experiment that you want to run.
+5. You should now see the welcome page of a mock experiment. You can click through it to see what it looks like. The second and third slide should contain the Consent Form from https://linguistics.stanford.edu/resources/experimental-protocol. If you are already familiar with HTML and Javascript, you can adapt the template for your needs. In any case, for this workshop, we'll pretend that this is the experiment that you want to run.
  
 6. In order for participants to see you experiments on the web, you will now upload it to your Stanford webspace.
 
@@ -56,13 +55,14 @@ Paste the keys from the previous step in the place of the placeholders.
 
 In this section, you will post the experiment to the MTurk Sandbox.
 
-1. To post experiments, you will be using a Python script. If you have not installed Python, you will first need to install it. You can download Python from `https://www.python.org/downloads/`. We recommend downloading 2.7, not 3.6.
+1. To post experiments, you will be using a Python script. If you have not installed Python, you will first need to install it. You can download Python from `https://www.python.org/downloads/`. The script will definitely work with Python 2.7, so we recommend downloading this.
 
-1. In the command line, move to the place where you have downloaded the experiment. Execute `git clone https://github.com/feste/Submiterator.git`.
+1. In the command line, navigate to the place where you have downloaded the experiment. Execute 
+```git clone https://github.com/feste/Submiterator.git```
 
-Again, if you have not installed git, you can `https://github.com/feste/Submiterator`, and click on `Clone or download`. Extract the downloaded zip file.
+Again, if you have not installed git, you can go to `https://github.com/feste/Submiterator`, and click on `Clone or download`. Extract the downloaded zip file.
 
-In either case, you will now have a folder called `Submiterator`.
+In either case, you will now have a directory called `Submiterator` at the place where you downloaded the script.
 
 2. Open a text editor and paste the following:
 
@@ -88,7 +88,7 @@ In either case, you will now have a folder called `Submiterator`.
 
 In the sixth line, replace `YOUR_SUNET_ID` with your SUNET ID.
 
-Save this file in the `Submiterator` directory that you have, giving it a name ending in `.config`, such as `my-first-experiment.config`.
+Save this file inside the `Submiterator` directory that you have, giving it a name ending in `.config`, such as `my-first-experiment.config`.
 
 3. Run the following commands:
 ```
@@ -106,6 +106,8 @@ The first one tells the Python script where to look for the AWS Command Line Too
 This will return a message giving the URL to the experiment on MTurk, and generate a bunch of files.
 The script stores the HIT's ID in the `my-first-experiment.success` file, so make sure not to delete this one before you have downloaded the results. If you're running an expensive experiment, it might make sense to backup this file.
 
+The name after `posthit` must match the name of the `.config` file that you created previously.
+
 4. To get the results:
 ```
     python submiterator.py getresults my-first-experiment
@@ -115,11 +117,10 @@ The script stores the HIT's ID in the `my-first-experiment.success` file, so mak
 ```
     python submiterator.py reformat my-first-experiment
 ```
+which will generate a set of `.tsv` files giving results by trials and subjects.
 
-which will generate a set of `.tsv` files.
 
-
-# Moving On
+# Beyond this Tutorial
 
 Here are some notes for running experiments beyond this tutorial.
 

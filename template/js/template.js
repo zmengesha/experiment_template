@@ -1,6 +1,24 @@
 function make_slides(f) {
   var   slides = {};
 
+  slides.consent = slide({
+     name : "consent",
+     start: function() {
+      exp.startT = Date.now();
+      $("#consent_2").hide();
+      exp.consent_position = 0;      
+     },
+    button : function() {
+      if(exp.consent_position == 0) {
+         exp.consent_position++;
+         $("#consent_1").hide();
+         $("#consent_2").show();
+      } else {
+        exp.go(); //use exp.go() if and only if there is no "present" data.
+      }
+    }
+  });
+
   slides.i0 = slide({
      name : "i0",
      start: function() {
@@ -292,7 +310,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "instructions", "single_trial", "one_slider", "multi_slider", "vertical_sliders", 'subj_info', 'thanks'];
+  exp.structure=["i0", "consent", "instructions", "single_trial", "one_slider", "multi_slider", "vertical_sliders", 'subj_info', 'thanks'];
 
   exp.data_trials = [];
   //make corresponding slides:

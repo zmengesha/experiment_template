@@ -34,6 +34,15 @@
     <!-- experiment file -->
     <script src="js/template.js"></script>
 
+
+<!-- Load consent form -->
+<script> 
+$(function(){
+  $("#consent-form").load("consent.html"); 
+});
+</script> 
+
+
 </head>
 
 <body onload="init();">
@@ -50,6 +59,20 @@
     <p>Here are some instructions.</p>
     <button onclick="_s.button()">Continue</button>
   </div>
+
+
+<div class="slide" id="consent">
+<span id="consent-form">
+<br/><b>PLEASE RETURN THE HIT.</b> <p>There is a technical
+problem and we cannot assure that you are fully aware of the content
+of the consent information. For this reason, you currently cannot
+participate in this study.<p>
+</p> We would appreciate if you could let
+us know about this problem, though this is not required.</p>
+</span>
+</div>
+
+
 
   <div class="slide" id="single_trial">
     <p>Here is a single trial. Depending on the condition, you'll see different words below:</p>
