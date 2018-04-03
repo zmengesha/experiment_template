@@ -52,7 +52,8 @@ Git is a version-control system and GitHub is a platform to host your projects.
 (For better organization, from now on you may want to create a folder (e.g., `ling245all`) to place all the relevant course material.)
 
 1. Open the terminal and cd into `ling245all`. Execute  
-```git clone https://github.com/feste/Submiterator.git
+```
+git clone https://github.com/feste/Submiterator.git
 ```
 
 2. There should now be a folder `Submiterator`.
