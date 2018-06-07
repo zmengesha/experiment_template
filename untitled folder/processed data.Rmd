@@ -1,0 +1,179 @@
+---
+title: "processing data"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#load data
+recogdat = read.csv("processed-recognition.csv")
+recalldat = read.csv("processed-recall.csv")
+
+
+
+library(dplyr)
+# adding a new column to the CSV file. Load the valence file first.
+valence = read.csv("valence.csv")
+recogdat = full_join(recogdat, valence)
+
+library(ggplot2)
+```
+
+First we'll look at attributions to talkers.
+Want to know, for each attribution, is it accurate or not.
+
+```{r recog-attributions}
+# This is a table of how attributions compare to actual talker
+with(recogdat, table(Attribution, Talker))
+
+# Now we want to look at whether or not the attribution was correct, i.e. an attribution was made -- TRUE will be cases where that talker said that word, FALSE will be cases where the other talker said that word or it was not said at all.
+recogdat$TrueOrFalseAttribution = NA
+recogdat[recogdat$Attribution!="Unknown", "TrueOrFalseAttribution"] = as.character(recogdat[recogdat$Attribution!="Unknown", "Attribution"]) == as.character(recogdat[recogdat$Attribution!="Unknown", "Talker"])
+AttributionTable = table(as.character(recogdat[recogdat$Attribution!="Unknown","Attribution"]), recogdat[recogdat$Attribution!="Unknown","TrueOrFalseAttribution"])
+AttributionTable
+
+# You can perform a chi-squared test directly on the table data
+chisq.test(AttributionTable)
+
+# You can also convert the table to proportions
+AttributionProportions = 
+  recogdat %>%
+  filter(Attribution != "Unknown") %>%
+  group_by(Attribution) %>%
+  summarize(
+    ProportionCorrect = sum(TrueOrFalseAttribution) / n()
+  )
+AttributionProportions
+```
+Now we are going to look at how people's judgments compared to the actual status in the word recognition task.
+```{r recogjudgment}
+# This is a table of how judgments compare to status
+JudgmentTable = with(recogdat, table(Judgment, Status))
+JudgmentTable
+# Performing a chi-square test on judgment data
+chisq.test(JudgmentTable)
+# Here we are converting the table to proportions. We constructed standard error and the confidence intervals
+JudgmentProportions =
+  recogdat %>%
+  group_by(Status) %>%
+  summarize(
+    ProportionOldjudgment = mean(Judgment == "old"),
+    proportion.se = sqrt((ProportionOldjudgment * (1 - ProportionOldjudgment)) / n()),
+    proportionold.uci = ProportionOldjudgment + 1.96 * proportion.se,
+    proportionold.lci = ProportionOldjudgment - 1.96 * proportion.se,
+    ProportionNewjudgment = mean(Judgment =="new"),
+     proportionnew.uci = ProportionNewjudgment + 1.96 * proportion.se,
+    proportionnew.lci = ProportionNewjudgment - 1.96 * proportion.se
+  )
+JudgmentProportions
+
+ggplot(JudgmentProportions, aes(x= Status, y= ProportionOldjudgment)) + 
+  geom_bar(stat= "identity") +
+  geom_errorbar(aes(ymin= proportionold.lci, ymax=proportionold.uci)) +
+  theme_bw() +
+  ylim(c(0, 1)) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", size = 1) 
+
+ggplot(JudgmentProportions, aes(x= Status, y= ProportionNewjudgment)) + 
+  geom_bar(stat= "identity") +
+  geom_errorbar(aes(ymin= proportionnew.lci, ymax=proportionnew.uci)) +
+  theme_bw() +
+  ylim(c(0, 1)) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", size = 1) 
+
+JudgmentProportionsReshaped = data.frame(
+  Status = c("new", "new", "old", "old"),
+  Judgment = c("new", "old", "new", "old"),
+  Proportion = c(JudgmentProportions[JudgmentProportions$Status=="new", "ProportionNewjudgment"][[1]],
+                 JudgmentProportions[JudgmentProportions$Status=="new", "ProportionOldjudgment"][[1]],
+                 JudgmentProportions[JudgmentProportions$Status=="old", "ProportionNewjudgment"][[1]],
+                 JudgmentProportions[JudgmentProportions$Status=="old", "ProportionOldjudgment"][[1]]),
+  Proportion.uci = c(JudgmentProportions[JudgmentProportions$Status=="new", "proportionnew.uci"][[1]],
+                     JudgmentProportions[JudgmentProportions$Status=="new", "proportionold.uci"][[1]],
+                     JudgmentProportions[JudgmentProportions$Status=="old", "proportionnew.uci"][[1]],
+                     JudgmentProportions[JudgmentProportions$Status=="old", "proportionold.uci"][[1]]),
+  Proportion.lci = c(JudgmentProportions[JudgmentProportions$Status=="new", "proportionnew.lci"][[1]],
+                     JudgmentProportions[JudgmentProportions$Status=="new", "proportionold.lci"][[1]],
+                     JudgmentProportions[JudgmentProportions$Status=="old", "proportionnew.lci"][[1]],
+                     JudgmentProportions[JudgmentProportions$Status=="old", "proportionold.lci"][[1]])
+)
+
+ggplot(JudgmentProportionsReshaped, aes(x= Status, y= Proportion, fill= Judgment)) +
+  geom_bar(stat= "identity", position=position_dodge(width=0.9)) +
+  geom_errorbar(aes(ymin=Proportion.lci, ymax=Proportion.uci), position=position_dodge(width=0.9), width = 0.7) +
+  theme_bw() +
+  ylim(c(0, 1)) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", size = 1)
+
+```
+
+
+
+```{r subset by talker}
+
+deshaun=subset(recogdat, Talker == "deshaun")
+status_old=subset(recogdat, Status == "old")
+status_old$Talker = factor(status_old$Talker)
+
+status_old$Attribution.fourway = as.character(status_old$Attribution)
+status_old[status_old$Judgment == "new", "Attribution.fourway"] = "new"
+status_old$Attribution.fourway = factor(status_old$Attribution.fourway)
+
+```
+I subset the recognition data to only look at words that were spoken by DeShaun or Conner. I did this to compare proportions of accurate judgments when the word was spoken. 
+```{r}
+# This is a table of how attributions compare to actual talker
+attributionmemtable = with(status_old, table(Judgment, Talker, Attribution))
+attributionmemtable
+
+
+# This is a table of how attributions compare to actual talker based on valence
+valencetable = with(status_old[status_old$Attribution %in% c("conner","deshaun"),], table(Talker, as.character(Attribution), Valence))
+valencetable
+#Attempting a chi-square test on the attribution data
+
+valenceproportions = 
+  status_old %>%
+  filter(Attribution %in% c("conner", "deshaun")) %>%
+  group_by(Valence, Talker) %>%
+  summarize(
+    attributionConner = mean(Attribution == "conner"),
+    attributionDeshaun = mean(Attribution == "deshaun"),
+    attribution.se = sqrt(attributionConner * attributionDeshaun / n())
+  )
+valenceproportions
+
+ValenceProportionsReshaped = data.frame(
+  Attribution = rep(c("conner", "deshaun"), each=6),
+  Valence = rep(rep(c("negative", "neutral", "stereotype"), each=2), 2),
+  Talker =rep(c("conner", "deshaun"), 6),
+  Proportion = c(valenceproportions$attributionConner,
+                 valenceproportions$attributionDeshaun
+                 ),
+  se = rep(valenceproportions$attribution.se, 2)
+)
+ValenceProportionsReshaped$Proportion.uci = ValenceProportionsReshaped$Proportion + 1.96 * ValenceProportionsReshaped$se
+ValenceProportionsReshaped$Proportion.lci = ValenceProportionsReshaped$Proportion - 1.96 * ValenceProportionsReshaped$se
+
+ggplot(ValenceProportionsReshaped, aes(x= Talker, y= Proportion, fill= Attribution)) +
+  geom_bar(stat= "identity", position=position_dodge(width=0.9)) +
+  geom_errorbar(aes(ymin=Proportion.lci, ymax=Proportion.uci), position=position_dodge(width=0.9), width = 0.7) +
+  theme_bw() +
+  ylim(c(0, 1)) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", size = 1) +
+  facet_grid(~ Valence)
+
+status_old$Valence = relevel(status_old$Valence, "neutral")
+status_old$Talker = relevel(status_old$Talker, "deshaun")
+
+# statistical model -- logistic regression (NOT mixed effects)
+model =
+  glm(
+    I(Attribution=="deshaun") ~ Talker * Valence, 
+    data = status_old[status_old$Attribution %in% c("conner", "deshaun"),], 
+    family="binomial"
+  )
+
+summary(model)
+```
